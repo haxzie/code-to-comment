@@ -52,7 +52,9 @@ import seq2seq_model
 from evaluation.meteor.meteor import Meteor
 
 import warnings
-warnings.filterwarnings("ignore", category=DeprecationWarning) 
+warnings.filterwarnings("ignore", category=DeprecationWarning)
+
+DATA_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 tf.app.flags.DEFINE_float("learning_rate", 0.5, "Learning rate.")
@@ -66,8 +68,8 @@ tf.app.flags.DEFINE_integer("size", 256, "Size of each model layer.")
 tf.app.flags.DEFINE_integer("num_layers", 1, "Number of layers in the model.")
 tf.app.flags.DEFINE_integer("code_vocab_size", 100000, "Program vocabulary size.")
 tf.app.flags.DEFINE_integer("en_vocab_size", 100000, "English vocabulary size.")
-tf.app.flags.DEFINE_string("data_dir", "/home/tjalling/Desktop/thesis/tensorflow/implementations/seq2seq/data/", "Data directory")
-tf.app.flags.DEFINE_string("train_dir", "/home/tjalling/Desktop/thesis/tensorflow/implementations/seq2seq/train/", "Training directory.")
+tf.app.flags.DEFINE_string("data_dir", os.path.join(DATA_PATH, "data/"), "Data directory")
+tf.app.flags.DEFINE_string("train_dir", os.path.join(DATA_PATH, "data/"), "Training directory.")
 tf.app.flags.DEFINE_string("dataset", "allCode", "Specify the name of which dataset to use.")
 tf.app.flags.DEFINE_string("dev_files", "dev/10pt.random", "The file path to the English dev file, relative from the data_dir.")
 tf.app.flags.DEFINE_string("translated_dev_code", "dev/translated.en", "The dev file with Code translated into English.")
