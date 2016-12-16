@@ -52,6 +52,11 @@ import seq2seq_model
 from evaluation.meteor.meteor import Meteor
 
 import warnings
+import logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+                    datefmt='%m-%d %H:%M',)
+logger = logging.getLogger(__file__)
+
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 DATA_PATH = os.path.dirname(os.path.abspath(__file__))
@@ -181,7 +186,7 @@ def translate_file(source_path=dev_code_file, target_path=translated_dev_code):
                     # Get output logits for the sentence.
                     _, _, output_logits = model.step(sess, encoder_inputs, decoder_inputs,
                                                                     target_weights, bucket_id, True)
-                                                                    
+
                                                                     
                     # This is a greedy decoder - outputs are just argmaxes of output_logits.
                     outputs = [int(np.argmax(logit, axis=1)) for logit in output_logits]
@@ -415,14 +420,16 @@ def self_test():
 
 
 def main(_):
+    logger.info("start")
     if FLAGS.self_test:
         self_test()
     elif FLAGS.decode:
         decode()
-    elif FLAGS.evaluate:  
+    elif FLAGS.evaluate:
         evaluate()
     else:
         train()
+    logger.info("stop")
 
 if __name__ == "__main__":
     tf.app.run()
