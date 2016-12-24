@@ -420,16 +420,20 @@ def self_test():
 
 
 def main(_):
-    logger.info("start")
+    logger.info("Start")
     if FLAGS.self_test:
+        logger.info("Self testing")
         self_test()
     elif FLAGS.decode:
+        logger.info("Decoding")
         decode()
     elif FLAGS.evaluate:
+        logger.info("Evaluating")
         evaluate()
     else:
+        logger.info("Training")
         train()
-    logger.info("stop")
+    logger.info("Stop")
 
 if __name__ == "__main__":
     tf.app.run()

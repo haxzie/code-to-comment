@@ -3,23 +3,27 @@ Set of (Tensorflow) implementations which generate comments from code. Thesis fo
 
 # How to execute:
 ## Seq2seq:
-- create/activate virtualenv
+- Create/activate virtualenv
 ```bash
 source ~/tensorflow/bin/activate
 ```
-- install requirements
+- Install requirements
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
-- Execute code:
+- Run training. Note, the trainig process has infinite loop in it:
 ```bash
-python translate.py --size=256 --num_layers=3 --steps_per_checkpoint=50 --bleu
+python translate.py --num_layers=3
+```
+- Run evaluation (only works when the model has been trained): 
+```bash
+python translate.py --num_layers=3 --evaluate
 ```
 
-- Or interactive mode (only works when the model has been trained): 
+- Run interactive translation mode (only works when the model has been trained): 
 ```bash
-python translate.py --size=350 --num_layers=3 --step_per_checkpoint=50 --decode
+python translate.py --num_layers=3 --step_per_checkpoint=50 --decode
 ```
 
 ### Options
