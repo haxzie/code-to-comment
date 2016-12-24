@@ -61,6 +61,21 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 DATA_PATH = os.path.dirname(os.path.abspath(__file__))
 
+tf.app.flags.DEFINE_boolean("decode", False,
+                            "Set to True for interactive decoding.")
+tf.app.flags.DEFINE_boolean("evaluate", False,
+                            "Run evaluation metrics on the output.")
+tf.app.flags.DEFINE_boolean("self_test", False,
+                            "Run a self-test if this is set to True.")
+
+tf.app.flags.DEFINE_integer("num_layers", 1, "Number of layers in the model.")
+tf.app.flags.DEFINE_integer("steps_per_checkpoint", 200,
+                            "How many training steps to do per checkpoint.")
+
+tf.app.flags.DEFINE_string("data_dir", os.path.join(DATA_PATH, "data/"), "Data directory")
+tf.app.flags.DEFINE_string("train_dir", os.path.join(DATA_PATH, "data/"), "Training directory.")
+tf.app.flags.DEFINE_string("dataset", "allCode", "Specify the name of which dataset to use.")
+tf.app.flags.DEFINE_string("dev_files", "dev/10pt.random", "The file path to the English dev file, relative from the data_dir.")
 
 tf.app.flags.DEFINE_float("learning_rate", 0.5, "Learning rate.")
 tf.app.flags.DEFINE_float("learning_rate_decay_factor", 0.99,
@@ -70,24 +85,12 @@ tf.app.flags.DEFINE_float("max_gradient_norm", 5.0,
 tf.app.flags.DEFINE_integer("batch_size", 64,
                             "Batch size to use during training.")
 tf.app.flags.DEFINE_integer("size", 256, "Size of each model layer.")
-tf.app.flags.DEFINE_integer("num_layers", 1, "Number of layers in the model.")
 tf.app.flags.DEFINE_integer("code_vocab_size", 100000, "Program vocabulary size.")
 tf.app.flags.DEFINE_integer("en_vocab_size", 100000, "English vocabulary size.")
-tf.app.flags.DEFINE_string("data_dir", os.path.join(DATA_PATH, "data/"), "Data directory")
-tf.app.flags.DEFINE_string("train_dir", os.path.join(DATA_PATH, "data/"), "Training directory.")
-tf.app.flags.DEFINE_string("dataset", "allCode", "Specify the name of which dataset to use.")
-tf.app.flags.DEFINE_string("dev_files", "dev/10pt.random", "The file path to the English dev file, relative from the data_dir.")
 tf.app.flags.DEFINE_string("translated_dev_code", "dev/translated.en", "The dev file with Code translated into English.")
 tf.app.flags.DEFINE_integer("max_train_data_size", 0,
                             "Limit on the size of training data (0: no limit).")
-tf.app.flags.DEFINE_integer("steps_per_checkpoint", 200,
-                            "How many training steps to do per checkpoint.")
-tf.app.flags.DEFINE_boolean("decode", False,
-                            "Set to True for interactive decoding.")
-tf.app.flags.DEFINE_boolean("self_test", False,
-                            "Run a self-test if this is set to True.")
-tf.app.flags.DEFINE_boolean("evaluate", False, 
-                            "Run evaluation metrics on the output.")
+
 
 FLAGS = tf.app.flags.FLAGS
 data_dir = FLAGS.data_dir  + FLAGS.dataset + "/"
