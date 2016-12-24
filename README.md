@@ -9,6 +9,7 @@ source ~/tensorflow/bin/activate
 ```
 - install requirements
 ```bash
+pip install --upgrade pip
 pip install -r requirements.txt
 ```
 - Execute code:

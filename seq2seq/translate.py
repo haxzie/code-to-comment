@@ -196,7 +196,7 @@ def translate_file(source_path=dev_code_file, target_path=translated_dev_code):
                         outputs = outputs[:outputs.index(data_utils.EOS_ID)]
                         
                     # Write translated sentence to translation file.
-                    translated_file.write(" ".join([tf.compat.as_str(rev_en_vocab[output]) for output in outputs]) + "\n")
+                    translated_file.write(" ".join([tf.compat.as_str(rev_en_vocab[output]) for output in outputs if output in rev_en_vocab]) + "\n")
                     
                     # print ("> %s" % sentence)
                     # print(" ".join([tf.compat.as_str(rev_en_vocab[output]) for output in outputs]))
@@ -224,7 +224,7 @@ def create_model(session, forward_only):
     model.saver.restore(session, ckpt.model_checkpoint_path)
   else:
     print("Created model with fresh parameters.")
-    session.run(tf.initialize_all_variables())
+    session.run(tf.global_variables_initializer())
   return model
 
 
@@ -393,7 +393,7 @@ def decode():
             if data_utils.EOS_ID in outputs:
                 outputs = outputs[:outputs.index(data_utils.EOS_ID)]
             # Print out French sentence corresponding to outputs.
-            print(" ".join([tf.compat.as_str(rev_en_vocab[output]) for output in outputs]))
+            print(" ".join([tf.compat.as_str(rev_en_vocab[output]) for output in outputs if output in rev_en_vocab]))
             print("> ", end="")
             sys.stdout.flush()
             sentence = sys.stdin.readline()
@@ -406,7 +406,7 @@ def self_test():
     # Create model with vocabularies of 10, 2 small buckets, 2 layers of 32.
     model = seq2seq_model.Seq2SeqModel(10, 10, [(3, 3), (6, 6)], 32, 2,
                                        5.0, 32, 0.3, 0.99, num_samples=8)
-    sess.run(tf.initialize_all_variables())
+    sess.run(tf.global_variables_initializer())
 
     # Fake data set for both the (3, 3) and (6, 6) bucket.
     data_set = ([([1, 1], [2, 2]), ([3, 3], [4]), ([5], [6])],
