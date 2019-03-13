@@ -72,10 +72,10 @@ tf.app.flags.DEFINE_integer("num_layers", 1, "Number of layers in the model.")
 tf.app.flags.DEFINE_integer("steps_per_checkpoint", 200,
                             "How many training steps to do per checkpoint.")
 
-tf.app.flags.DEFINE_string("data_dir", os.path.join(DATA_PATH, "data/"), "Data directory")
-tf.app.flags.DEFINE_string("train_dir", os.path.join(DATA_PATH, "data/"), "Training directory.")
-tf.app.flags.DEFINE_string("dataset", "allCode", "Specify the name of which dataset to use.")
-tf.app.flags.DEFINE_string("dev_files", "dev/10pt.random", "The file path to the English dev file, relative from the data_dir.")
+#tf.app.flags.DEFINE_string("data_dir", os.path.join(DATA_PATH, "data/"), "Data directory")
+#tf.app.flags.DEFINE_string("train_dir", os.path.join(DATA_PATH, "data/"), "Training directory.")
+#tf.app.flags.DEFINE_string("dataset", "allCode", "Specify the name of which dataset to use.")
+#tf.app.flags.DEFINE_string("dev_files", "dev/10pt.random", "The file path to the English dev file, relative from the data_dir.")
 
 tf.app.flags.DEFINE_float("learning_rate", 0.5, "Learning rate.")
 tf.app.flags.DEFINE_float("learning_rate_decay_factor", 0.99,
